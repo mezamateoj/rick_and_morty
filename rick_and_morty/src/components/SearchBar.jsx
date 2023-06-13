@@ -28,8 +28,8 @@ export default function SearchBar({ onSearch }) {
             value={id}
             onChange={handleChange}
          />
-         <button onClick={handleOnClick}>Add</button>
-         <button onClick={randomId}>Add Random</button>
+         <button className="btn-nav" onClick={handleOnClick}>Add</button>
+         <button className="btn-nav" onClick={randomId}>Add Random</button>
       </div>
    );
 }
