@@ -4,14 +4,15 @@ import Card from './Card';
 
 export default function Cards(props) {
    return (
-   <div>
+   <div className='cards-container'>
       {
          React.Children.toArray(props.characters.map(character => {
             return (
              <>
                <Card 
+               id={character.id}
                {...character}
-               onClose={() => window.alert('Emulamos que se cierra la card')}
+               onClose={props.onClose}
 
                />
              </>  

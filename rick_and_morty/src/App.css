@@ -1,3 +1,43 @@
 .App {
+   /* display: grid; */
    text-align: center;
+
 }
+
+.cards-container {
+   display: flex;
+   border: 6px solid blueviolet;
+}
+
+.card {
+   border: 5px solid black;
+   font-size: 10px;
+   width: 250px;
+   height: 250px;
+   border-radius: 5px;
+}
+
+#image {
+   height: 50px;
+   width: fit-content;
+}
+
+.nav {
+   border: 5px black solid;
+   height: 75px;
+   background-color: bisque;
+}
+
+.field-search {
+   width: 50%;
+   border: 0;
+   border-bottom: 2px solid '#9b9b9b';
+   font-size: 1.3rem;
+   color: black;
+   padding: 7px 0;
+   /* background: transparent; */
+   transition: border-color 0.2s;
+
+}
+
+
