@@ -1,12 +1,15 @@
 .App {
    /* display: grid; */
    text-align: center;
+   /* display: flex; */
 
 }
 
 .cards-container {
-   display: flex;
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
    border: 6px solid blueviolet;
+   gap: 5px;
 }
 
 .card {

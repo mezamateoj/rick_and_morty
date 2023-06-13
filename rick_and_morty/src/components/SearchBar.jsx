@@ -15,6 +15,10 @@ export default function SearchBar({ onSearch }) {
       setId('')
    }
 
+   function randomId() {
+      const randomId = Math.floor(Math.random() * 826)
+      onSearch(randomId)
+   }
    
    return (
       <div>
@@ -25,6 +29,7 @@ export default function SearchBar({ onSearch }) {
             onChange={handleChange}
          />
          <button onClick={handleOnClick}>Add</button>
+         <button onClick={randomId}>Add Random</button>
       </div>
    );
 }
