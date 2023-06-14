@@ -1,22 +1,19 @@
-.App {
-   /* display: grid; */
+/* .App {
    text-align: center;
-   /* display: flex; */
-
-}
+} */
 
 body {
    margin: 0px;
-   background-color: #C4D7E0;
+   background-color: #393646;
 }
 
 
 .nav {
    /* border: 5px black solid; */
    height: 75px;
-   background-color: #6E85B7;
+   background-color: #F4EEE0;
    display: flex;
-   justify-content: end;
+   justify-content: flex-end;
    padding: 5px 5px;
 }
 
@@ -42,37 +39,63 @@ body {
    cursor: pointer;
 }
 
-/* cards css */
+.title {
+   font-size: 30px;
+   margin-left: 200px;
+}
+
+/* cards css styles --------------------------------------*/
 
 .cards-container {
    display: grid;
    grid-template-columns: 1fr 1fr 1fr 1fr;
-   /* border: 6px solid blueviolet; */
    gap: 5px;
    margin: 10px 20px;
 }
 
+@media (max-width: 768px) {
+   .cards-container {
+      grid-template-columns: 1fr 1fr;
+   }
+}
+   
 .card {
-   /* border: 5px solid black; */
-   /* background-color: #F8F9D7; */
+   margin-top: 20px;
    background-color: #9BABB8;
    font-size: 10px;
-   width: 250px;
-   height: 250px;
+   width: 350px;
+   height: 200px;
+   border-radius: 5px;
+   display: flex;
+   justify-content: space-between;
+   gap: 15px;
+}
+
+.card-img {
+   width: 175px;
    border-radius: 5px;
 }
 
-#image {
-   height: 50px;
-   width: fit-content;
+.card-text {
+   margin-right: auto;
 }
 
+.card-text h2 {
+   font-size: 12px;
+
+}
 .btn-close {
    margin-top: 3px;
-   line-height: 27px;
+   margin-left: 3px;
+   line-height: 20px;
    padding: 0px 16px;
-   border: 1px solid #dfe1e5;
-   border-radius: 4px;
-   font-size: 14px;
+   /* border: 1px solid #dfe1e5; */
+   /* border-radius: 4px; */
+   border: none;
+   font-size: 10px;
    cursor: pointer;
+   background-color: #9BABB8;
+   /* color: black; */
+   height: 20px;
+   /* float: left; */
 }
