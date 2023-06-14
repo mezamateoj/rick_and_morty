@@ -7,13 +7,15 @@ body {
    background-color: #393646;
 }
 
+/* nav css style ---------------------------------- */
 
+/* todo when clik about add random button hidden  */
 .nav {
    /* border: 5px black solid; */
    height: 75px;
    background-color: #F4EEE0;
    display: flex;
-   justify-content: flex-end;
+   /* justify-content: flex-end; */
    padding: 5px 5px;
 }
 
@@ -39,9 +41,32 @@ body {
    cursor: pointer;
 }
 
-.title {
+/* .title {
    font-size: 30px;
    margin-left: 200px;
+} */
+
+.about {
+   /* background-color: aqua; */
+   margin-top: 10px;
+   line-height: 27px;
+   margin: 11px 4px;
+   padding: 0px 16px;
+   border: 1px solid #dfe1e5;
+   border-radius: 4px;
+   font-size: 14px;
+   cursor: pointer;
+}
+
+.home {
+   margin-top: 10px;
+   line-height: 27px;
+   margin: 11px 4px;
+   padding: 0px 16px;
+   border: 1px solid #dfe1e5;
+   border-radius: 4px;
+   font-size: 14px;
+   cursor: pointer;
 }
 
 /* cards css styles --------------------------------------*/
@@ -98,4 +123,10 @@ body {
    /* color: black; */
    height: 20px;
    /* float: left; */
+}
+
+/* details css styles --------- */
+.detail-container {
+   display: flex;
+   justify-content: center;
 }

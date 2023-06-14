@@ -6,19 +6,9 @@ import Cards from './components/Cards.jsx';
 import Nav from './components/Nav';
 // import SearchBar from './components/SearchBar.jsx';
 // import characters from './data.js';
-
-const example = {
-   id: 1,
-   name: 'Rick Sanchez',
-   status: 'Alive',
-   species: 'Human',
-   gender: 'Male',
-   origin: {
-      name: 'Earth (C-137)',
-      url: 'https://rickandmortyapi.com/api/location/1',
-   },
-   image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-};
+import { Routes, Route } from "react-router-dom";
+import About from './components/About';
+import Detail from './components/Detail';
 
 
 function App() {
@@ -37,7 +27,12 @@ function App() {
          } else {
             window.alert('ID does not exist! Please enter a valid ID!');
          }
-      });
+      }).catch((error) => {  // handle if user inputs letters
+         if(error.response) {
+            console.log(error.response.status);
+            alert('Please enter a number ID!')
+         }
+      })
    }
 
    function onClose(id) {
@@ -49,7 +44,12 @@ function App() {
    return (
       <div className='App'>
          <Nav onSearch={onSearch}/>
-         <Cards characters={characters} onClose={onClose} />
+         <Routes>
+            <Route path='/' element={<Cards characters={characters} onClose={onClose} />} />
+            <Route path='/about' element={<About/>} />
+            <Route path='/detail/:id' element={<Detail />}/>
+            {/* <Route /> */}
+         </Routes>
       </div>
    );
 }

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Card(props) {
    return (
       <div className="card">
@@ -5,7 +7,9 @@ export default function Card(props) {
 
          <div className="card-text">      
             <h2>ID: {props.id}</h2>
-            <h2>Name: {props.name}</h2>
+            <Link to={`/detail/${props.id}`}>
+               <h2>Name: {props.name}</h2>
+            </Link>
             <h2>{props.status} - <span>{props.species}</span></h2>
             <h2>{props.gender}</h2>
          </div>
