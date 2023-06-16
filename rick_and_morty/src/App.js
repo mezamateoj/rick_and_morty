@@ -1,18 +1,43 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
-// import Card from './components/Card.jsx';
 import Cards from './components/Cards.jsx';
 import Nav from './components/Nav';
-// import SearchBar from './components/SearchBar.jsx';
-// import characters from './data.js';
 import { Routes, Route } from "react-router-dom";
 import About from './components/About';
 import Detail from './components/Detail';
+import Form from './components/Form';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 
 function App() {
-   const [characters, setCharacters] = React.useState([])
+   const navigate = useNavigate()
+
+   const [characters, setCharacters] = useState([])
+
+   const [access, setAccess] = useState(false)
+
+   const EMAIL = 'mezamateoj@gmail.com'
+   const PASSWORD = 'Pepito13'
+
+   function login(data) {
+      if (data.email === EMAIL && data.password === PASSWORD) {
+         setAccess(true)
+         navigate('/home');
+      } else {
+         setAccess(false)
+         navigate('/')
+         alert('Wrong Credentials')
+      }
+   }
+
+   useEffect(() => {
+      !access && navigate('/');
+   }, [access])
 
    // push which is not the correct way to update state in React. 
    // push modifies the original array and doesn't return a new array, 
@@ -25,12 +50,12 @@ function App() {
             }
             setCharacters((oldChars) => [...oldChars, data]);
          } else {
-            window.alert('ID does not exist! Please enter a valid ID!');
+            window.alert('Please enter a valid ID!');
          }
       }).catch((error) => {  // handle if user inputs letters
          if(error.response) {
             console.log(error.response.status);
-            alert('Please enter a number ID!')
+            alert('Please enter a valid ID!')
          }
       })
    }
@@ -45,7 +70,8 @@ function App() {
       <div className='App'>
          <Nav onSearch={onSearch}/>
          <Routes>
-            <Route path='/' element={<Cards characters={characters} onClose={onClose} />} />
+            <Route path='/' element={<Form login={login} />} />
+            <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
             <Route path='/about' element={<About/>} />
             <Route path='/detail/:id' element={<Detail />}/>
             {/* <Route /> */}
