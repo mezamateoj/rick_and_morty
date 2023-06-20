@@ -13,11 +13,13 @@ function Nav ({onSearch}) {
     }
     return (
         <nav className="nav">
-            {/* <h1 className="title">Rick and Morty</h1> */}
-            <SearchBar onSearch={onSearch} />
-            <NavLink className={'about'} to={'/about'}>About</NavLink> 
-            <NavLink className={'Home'} to={'/home'}>Home</NavLink> 
-            <NavLink className={'LogOut'} to={'/'}>Log Out</NavLink>
+            <h1>Rick and Morty</h1>
+            <ul className="nav-items">
+                <li> <SearchBar className='search-nav' onSearch={onSearch} /> </li>
+                <li><NavLink style={{ textDecoration: 'none'}} className="about" to={'/about'}>About</NavLink></li> 
+                <li><NavLink style={{ textDecoration: 'none' }} className='home' to={'/home'}>Home</NavLink></li>
+                <li><NavLink style={{ textDecoration: 'none' }} className='logout' to={'/'}>Log Out</NavLink></li>
+            </ul>
         </nav>
     )
 

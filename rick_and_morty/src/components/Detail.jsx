@@ -21,14 +21,18 @@ function Detail() {
 
     return (
         <div className="detail-container">
-            <div className="img-container">
+            <div className="card-container">
                 <img src={character.image} alt="" />
-            </div>
-            <div className="detail-text">
-                <h1>ID {character.id}</h1>
-                <h3>Status {character.status}</h3>
-                <h3> Specie {character.species}</h3>
-                <h3>Gender {character.gender}</h3>
+                <div className="shade"></div>
+                <div className="detail-text">
+                    <h2>Name : {character.name}</h2>
+                    <p>
+                        <h3>ID: {character.id}</h3>
+                        Specie: {character.species}<br></br>
+                        Gender: {character.gender}
+                    </p>
+                    <h4>Status: {character.status}</h4>
+                </div>
             </div>
         </div>
     )

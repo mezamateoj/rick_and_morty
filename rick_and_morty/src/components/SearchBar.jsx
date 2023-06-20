@@ -21,13 +21,14 @@ export default function SearchBar({ onSearch }) {
    }
    
    return (
-      <div>
-         <input className="field-search" 
-            type='search' 
-            placeholder="id.." 
-            value={id}
-            onChange={handleChange}
-         />
+      <div className="search-container">
+         <label htmlFor="">ID</label>
+            <input className="field-search" 
+               type='search' 
+               // placeholder="id.." 
+               value={id}
+               onChange={handleChange}
+            />
          <button className="btn-nav" onClick={handleOnClick}>Add</button>
          <button className="btn-nav" onClick={randomId}>Add Random</button>
       </div>
