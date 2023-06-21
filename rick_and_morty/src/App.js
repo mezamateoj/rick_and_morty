@@ -40,7 +40,7 @@ function App({removeFav}) {
 
    useEffect(() => {
       !access && navigate('/');
-   }, [access])
+   }, [access, navigate])
 
    // push which is not the correct way to update state in React. 
    // push modifies the original array and doesn't return a new array, 

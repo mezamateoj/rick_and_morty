@@ -9,13 +9,9 @@ export function Card(props) {
    const [isFav, setIsFav] = useState(false)
 
    useEffect(() => {
-      props.myFavorites.forEach((fav) => {
-         if (fav.id === props.id) {
-            setIsFav(true);
-         }
-      });
+      const isFav = props.myFavorites.find((fav) => fav.id === props.id);
+      setIsFav(!!isFav);
    }, [props.myFavorites, props.id]);
-
 
    function handleFavorite() {
       if (isFav) {
