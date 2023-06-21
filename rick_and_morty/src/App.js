@@ -7,14 +7,17 @@ import { Routes, Route } from "react-router-dom";
 import About from './components/About';
 import Detail from './components/Detail';
 import Form from './components/Form';
+import Favorites from './components/Favorites'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { removeFav } from './redux/actions';
 
 
 
 
-function App() {
+function App({removeFav}) {
    const navigate = useNavigate()
 
    const [characters, setCharacters] = useState([])
@@ -49,6 +52,7 @@ function App() {
                return window.alert('Character already exists!');
             }
             setCharacters((oldChars) => [...oldChars, data]);
+
          } else {
             window.alert('Please enter a valid ID!');
          }
@@ -64,6 +68,7 @@ function App() {
       const numberId = Number(id);
       const filteredCharacters = characters.filter((character) => character.id !== numberId);
       setCharacters(filteredCharacters);
+      removeFav(numberId)
    }
    
    return (
@@ -73,10 +78,19 @@ function App() {
             <Route path='/' element={<Form login={login} />} />
             <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
             <Route path='/about' element={<About/>} />
+            <Route path='/favorites' element={<Favorites onClose={onClose}/>} />
             <Route path='/detail/:id' element={<Detail />}/>
          </Routes>
       </div>
    );
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+   return {
+      removeFav: (id) => dispatch(removeFav(id))
+   }
+}
+
+export default connect(null, mapDispatchToProps)(App);
+
+
