@@ -15,9 +15,23 @@ export function filterCards(gender) {
     }
 }
 
+
+
 export function orderCards(orden) {
     return {
         type: 'ORDER',
         payload: orden
+    }
+}
+
+export function resetFilters() {
+    return {
+        type: 'RESET'
+    }
+}
+
+export function logOut() {
+    return {
+        type: 'LOGOUT'
     }
 }

@@ -5,12 +5,19 @@ import { useLocation } from "react-router-dom";
 // import Form from "./Form";
 
 
-function Nav ({onSearch}) {
+function Nav ({onSearch, onLogout }) {
     const location = useLocation()
+
     if (location.pathname === '/') {
         // return <Form />
         return null
     }
+
+    function handleLogout() {
+        onLogout()
+    }
+
+
     return (
         <nav className="nav">
             <h1>Rick and Morty</h1>
@@ -19,7 +26,7 @@ function Nav ({onSearch}) {
                 <li><NavLink style={{ textDecoration: 'none'}} className="about" to={'/about'}>About</NavLink></li> 
                 <li><NavLink style={{ textDecoration: 'none' }} className='home' to={'/home'}>Home</NavLink></li>
                 <li><NavLink style={{ textDecoration: 'none' }} className='fav' to={'/favorites'}>Favorites</NavLink></li>
-                <li><NavLink style={{ textDecoration: 'none' }} className='logout' to={'/'}>Log Out</NavLink></li>
+                <li><NavLink style={{ textDecoration: 'none' }} className='logout' to={'/'} onClick={handleLogout}>Log Out</NavLink></li>
             </ul>
         </nav>
     )

@@ -27,7 +27,7 @@ export function Card(props) {
             image: props.image
          });
          setIsFav(true);
-         }
+      }
    }
 
    return (

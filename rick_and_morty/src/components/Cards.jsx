@@ -6,7 +6,7 @@ export default function Cards(props) {
    return (
    <div className='cards-container'>
       {
-         React.Children.toArray(props.characters.map(character => {
+         React.Children.toArray(props.characters?.map(character => {
             return (
              <>
                <Card 
