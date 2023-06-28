@@ -1,6 +1,8 @@
-const fs = require('fs')
+// const fs = require('fs')
 const http = require('http')
-const data = require('./utils/data');
+// const data = require('./utils/data');
+// import axios from 'axios';
+const getCharById = require('./controllers/getCharById');
 
 
 // function makeDataRequest(type, cb) {
@@ -46,14 +48,7 @@ const server = http.createServer((req, res) => {
 
     if (req.url.includes('/rickandmorty/character')) {
         const id = parseInt(req.url.split('/').pop());
-        const character = data.find(char => char.id === id);
-
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify(character))
-        
-    } else {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('Character not found');
+        getCharById(res, id)
     }
 
 });
