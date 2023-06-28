@@ -63,7 +63,7 @@ function App({removeFav, logOut}) {
    // push modifies the original array and doesn't return a new array, 
    // which can lead to unpredictable state change
    function onSearch(id) {
-      axios.get(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+      axios.get(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
          if (data.name) {
             if (characters.find((character) => character.id === data.id)) {
                return window.alert('Character already exists!');

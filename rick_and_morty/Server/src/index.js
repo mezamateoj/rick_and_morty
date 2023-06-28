@@ -1,47 +1,66 @@
 const fs = require('fs')
 const http = require('http')
+const data = require('./utils/data');
 
 
-function makeDataRequest(type, cb) {
-    fs.readfile('./utils/data.js', 'utf8', (err, data) => {
-        if (err) {
-            cb(err, null)
-        } else {
-            const parsedData = JSON.parse(data)
-            cb(null, parsedData[type])
-        }
-    })
-}
+// function makeDataRequest(type, cb) {
+//     // fs.readFile('./utils/data.js', 'utf8', (err, data) => {
+//     //     if (err) {
+//     //         cb(err, null)
+//     //     } else {
+//     //         const parsedData = JSON.parse(data)
+//     //         cb(null, parsedData[type])
+//     //     }
+//     // })
+//     const parsedData = data[type];
+//     cb(null, parsedData);
+// }
 
-function handleGetRequest(req, res) {
-    if (req.url === '/rickandmorty/character') {
-        makeDataRequest('character', (err, data) => {
-            if (err) {
-                res.writeHead(500, { 'Content-Type': 'text/plain' })
-                res.end('Server error')
-            } else {
-                res.writeHead(200, { 'Content-Type': 'application/json' })
-                res.end(JSON.stringify(data))
-            }
-        })
-    }
-}
+// function handleGetRequest(req, res) {
+//     if (req.url.includes('/rickandmorty/character/')) {
+//         console.log(req.url)
+//         const id = parseInt(req.url.split('/').pop());
+//         console.log(id)
+//         res.writeHead(200, { 'Content-Type': 'application/json' })
+//         res.end(JSON.stringify(data[id]))
+//         // const id = Number(req.url.split('/').pop());
+//         // makeDataRequest(id, (err, data) => {
+//         //     if (err) {
+//         //         res.writeHead(500, { 'Content-Type': 'text/plain' })
+//         //         res.end('Server error')
+//         //     } else if (data) {
+//         //         res.writeHead(200, { 'Content-Type': 'application/json' })
+//         //         res.end(JSON.stringify(data))
+//         //     } else {
+//         //         res.writeHead(404, { 'Content-Type': 'text/plain' });
+//         //         res.end('Character not found');
+//         //     }
+//         // })
+//     }
+// }
 
 
 
 const server = http.createServer((req, res) => {
-    const {method} = req;
-    switch (method) {
-        case 'GET':
-            return handleGetRequest(req, res);
-        default:
-            throw new Error(`Method not supported ${method}}`);
-    }
-    // res.end('Hello World')
-}
-)
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
-server.listen(30001, () => console.log('Server running on port 30001'))
+    if (req.url.includes('/rickandmorty/character')) {
+        const id = parseInt(req.url.split('/').pop());
+        const character = data.find(char => char.id === id);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(character))
+        
+    } else {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Character not found');
+    }
+
+});
+
+server.listen(3001, 'localhost', () => {
+    console.log('Server is listening on port 3001')
+})
 
 
 module.exports = server
