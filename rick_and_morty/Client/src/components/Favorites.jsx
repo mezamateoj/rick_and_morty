@@ -28,19 +28,25 @@
 
         return (
             <>  
-                <select  onChange={handleOrder} name="" id="">
-                    <option value="A">Ascendent</option>
-                    <option value="D">Descendent</option>
-                </select>
-                <select  onChange={handleFilter} name="" id="">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Genderless">Genderless</option>
-                    <option value="unknown">unknown</option>
-                </select>
-                <button onClick={handleReset} >Reset</button>
+                <div className="filters-fav">
+                    {/* <h1>Favorite cards</h1> */}
+                    <select  onChange={handleOrder} name="" id="" className="order-filter">
+                        <option value="A">Ascendent</option>
+                        <option value="D">Descendent</option>
+                    </select>
+                    <select  onChange={handleFilter} name="" id="" className="gender-filter">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Genderless">Genderless</option>
+                        <option value="unknown">unknown</option>
+                    </select>
+                    <button className="reset-filters" onClick={handleReset} >Reset</button>
+                </div>
+                <div className="cards-container">
                 {
-                    myFavorites?.map(e => <Card key={e.id} id={e.id} 
+                    myFavorites?.map(e => 
+                    
+                    <Card key={e.id} id={e.id} 
                         {...e} 
                         onClose={onClose}
                         myFavorites={myFavorites} 
@@ -48,6 +54,7 @@
                         removeFav={removeFav}
                         />)
                 }
+                </div>
             </>
         )
     }

@@ -22,7 +22,6 @@ function getCharById(res, id) {
         return saveChar;
     })
     .then((saveChar) => {
-        console.log(saveChar)
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify(saveChar));
     })

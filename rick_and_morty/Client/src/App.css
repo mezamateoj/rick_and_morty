@@ -316,3 +316,29 @@ ul:first-child li {
    text-transform: uppercase;
    cursor: pointer;
 }
+
+/* filters css  */
+.filters-fav {
+   display: flex;
+   justify-content: flex-end;
+   padding: 20px 20px 0 0;
+   gap: 7px;
+   /* margin-right: 20px; */
+}
+
+.filters-fav > select   {
+   font-family: inherit;
+   font-weight: bold;
+   padding: 5px 5px;
+   border-radius: 6px;
+   background-color: #F4EEE0;
+}
+
+.reset-filters {
+   font-family: inherit;
+   font-weight: bold;
+   /* padding: 5px 5px; */
+   cursor: pointer;
+   border-radius: 6px;
+   background-color: #F4EEE0;
+}

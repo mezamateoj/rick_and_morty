@@ -13,6 +13,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { removeFav, logOut } from './redux/actions';
+import Pagination from './components/Pagination';
+import Create from './components/Create';
 
 
 
@@ -24,7 +26,26 @@ function App({removeFav, logOut}) {
 
    const [access, setAccess] = useState(false)
 
-   const [page, setPage] = useState(0)
+   // // where the user is in the app
+   // const [currentPage, setCurrentPage] = useState(1)
+   // // number of characters per page
+   // const [charsPerPage] = useState(8)
+
+
+   // // index of the last character of the page
+   // const lastCharIndex = currentPage * charsPerPage
+   // // index of the first character of the page
+   // const firstCharIndex = lastCharIndex - charsPerPage
+   // // // calculate the number of pages
+   // // const pages = Math.ceil(characters.length / charsPerPage)
+   // // records to be displayed on the current page
+   // const currentChars = characters.slice(firstCharIndex, lastCharIndex)
+
+   // const paginate = (pageNumber) => {
+   //    setCurrentPage(pageNumber);
+   // };
+
+
 
    const EMAIL = 'mezamateoj@gmail.com'
    const PASSWORD = 'Pepito13'
@@ -50,14 +71,6 @@ function App({removeFav, logOut}) {
       !access && navigate('/');
    }, [access, navigate])
 
-   // function nextPage() {
-   //    setPage((old) => {
-   //       let next = old + 1
-   //       if (next >)
-   //    })
-
-
-   // }
 
    // push which is not the correct way to update state in React. 
    // push modifies the original array and doesn't return a new array, 
@@ -91,11 +104,14 @@ function App({removeFav, logOut}) {
    return (
       <div className='App'>
          <Nav onSearch={onSearch} onLogout={logout}/>
+         {/* <Pagination pages={pages} setCurrentPage={setCurrentPage} /> */}
          <Routes>
             <Route path='/' element={<Form login={login} />} />
             <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
+            {/* <Route path='/home' element={<Pagination charsPerPage={charsPerPage} totalPosts={characters.length} paginate={paginate} />} /> */}
             <Route path='/about' element={<About/>} />
             <Route path='/favorites' element={<Favorites onClose={onClose}/>} />
+            <Route path='/create' element={<Create/>} />
             <Route path='/detail/:id' element={<Detail />}/>
          </Routes>
       </div>
