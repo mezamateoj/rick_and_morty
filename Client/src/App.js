@@ -47,18 +47,27 @@ function App({removeFav, logOut}) {
 
 
 
-   const EMAIL = 'mezamateoj@gmail.com'
-   const PASSWORD = 'Pepito13'
+   // const EMAIL = 'mezamateoj@gmail.com'
+   // const PASSWORD = 'Pepito13'
 
-   function login(data) {
-      if (data.email === EMAIL && data.password === PASSWORD) {
-         setAccess(true)
-         navigate('/home');
-      } else {
-         setAccess(false)
-         navigate('/')
-         alert('Wrong Credentials')
-      }
+   // function login(data) {
+   //    if (data.email === EMAIL && data.password === PASSWORD) {
+   //       setAccess(true)
+   //       navigate('/home');
+   //    } else {
+   //       setAccess(false)
+   //       navigate('/')
+   //       alert('Wrong Credentials')
+   //    }
+   // }
+   function login(userData) {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+         const { access } = data;
+         setAccess(data);
+         access && navigate('/home');
+      });
    }
 
    function logout() {

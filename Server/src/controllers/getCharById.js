@@ -1,6 +1,14 @@
 const axios = require('axios');
+const express = require('express')
 
-function getCharById(res, id) {
+const getCharById = express.Router()
+
+
+const url = ('https://rickandmortyapi.com/api/character/:id')
+
+getCharById.get('/character/:id', (req, res) => {
+    const {id} = req.params
+    
     axios.get(`https://rickandmortyapi.com/api/character/${id}`)
     // first promise for the axios request
     .then((res) => {
@@ -30,5 +38,6 @@ function getCharById(res, id) {
         res.end(err);
     })
 }
+)
 
 module.exports = getCharById;

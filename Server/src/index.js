@@ -1,60 +1,54 @@
-// const fs = require('fs')
-const http = require('http')
-// const data = require('./utils/data');
-// import axios from 'axios';
 const getCharById = require('./controllers/getCharById');
+const { postFav, deleteFav } = require('./controllers/handleFavorites')
+const loginInfo = require('./controllers/login')
+const createImg = require('./controllers/createAI')
+const express = require('express')
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const server = express()
+const port = 3001
 
+// const http = require('http')
+// node way of creating server
+// const server = http.createServer((req, res) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
 
-// function makeDataRequest(type, cb) {
-//     // fs.readFile('./utils/data.js', 'utf8', (err, data) => {
-//     //     if (err) {
-//     //         cb(err, null)
-//     //     } else {
-//     //         const parsedData = JSON.parse(data)
-//     //         cb(null, parsedData[type])
-//     //     }
-//     // })
-//     const parsedData = data[type];
-//     cb(null, parsedData);
-// }
-
-// function handleGetRequest(req, res) {
-//     if (req.url.includes('/rickandmorty/character/')) {
-//         console.log(req.url)
+//     if (req.url.includes('/rickandmorty/character')) {
 //         const id = parseInt(req.url.split('/').pop());
-//         console.log(id)
-//         res.writeHead(200, { 'Content-Type': 'application/json' })
-//         res.end(JSON.stringify(data[id]))
-//         // const id = Number(req.url.split('/').pop());
-//         // makeDataRequest(id, (err, data) => {
-//         //     if (err) {
-//         //         res.writeHead(500, { 'Content-Type': 'text/plain' })
-//         //         res.end('Server error')
-//         //     } else if (data) {
-//         //         res.writeHead(200, { 'Content-Type': 'application/json' })
-//         //         res.end(JSON.stringify(data))
-//         //     } else {
-//         //         res.writeHead(404, { 'Content-Type': 'text/plain' });
-//         //         res.end('Character not found');
-//         //     }
-//         // })
+//         getCharById(res, id)
 //     }
-// }
+
+// });
+server.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header(
+       'Access-Control-Allow-Headers',
+       'Origin, X-Requested-With, Content-Type, Accept'
+    );
+    res.header(
+       'Access-Control-Allow-Methods',
+       'GET, POST, OPTIONS, PUT, DELETE'
+    );
+    next();
+ });
+
+
+server.use(express.json())
+// server.use(bodyParser.json());
+// server.use(cors());
+
+server.use('/rickandmorty', getCharById)
+server.use('/rickandmorty', postFav)
+server.use('/rickandmorty', deleteFav)
+server.use('/rickandmorty', loginInfo)
+server.use(createImg)
 
 
 
-const server = http.createServer((req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
 
-    if (req.url.includes('/rickandmorty/character')) {
-        const id = parseInt(req.url.split('/').pop());
-        getCharById(res, id)
-    }
-
-});
-
-server.listen(3001, 'localhost', () => {
-    console.log('Server is listening on port 3001')
+server.listen(port, 'localhost', () => {
+    console.log(`Server listening on port ${port}`)
 })
 
 

@@ -10,19 +10,29 @@ export default function reducer(state=initialState, action) {
 
     switch(action.type) {
         case 'ADD_FAV':
+            return { ...state, 
+                myFavorites: action.payload, 
+                allCharacters: action.payload 
+            };
+        // case 'ADD_FAV':
 
-            return {
-                ...state,
-                allCharacters: [...state.allCharacters, action.payload],
-                myFavorites: [...state.myFavorites, action.payload],
-                originalFavorites: [...state.originalFavorites, action.payload],
-            }
+        //     return {
+        //         ...state,
+        //         allCharacters: [...state.allCharacters, action.payload],
+        //         myFavorites: [...state.myFavorites, action.payload],
+        //         originalFavorites: [...state.originalFavorites, action.payload],
+        //     }
+        // REDUCER | REMOVE_FAV
         case 'REMOVE_FAV':
-            return {
-                ...state,
-                myFavorites: state.myFavorites.filter(card => card.id !== Number(action.payload)),
-                originalFavorites: state.originalFavorites.filter(card => card.id !== Number(action.payload))
-            }
+            return { ...state, 
+                myFavorites: action.payload 
+            };
+        // case 'REMOVE_FAV':
+        //     return {
+        //         ...state,
+        //         myFavorites: state.myFavorites.filter(card => card.id !== Number(action.payload)),
+        //         originalFavorites: state.originalFavorites.filter(card => card.id !== Number(action.payload))
+        //     }
         case 'FILTER':
             return {
                 ...state,
