@@ -1,29 +1,25 @@
-const express = require('express')
-
 
 let myFavorites = []
 
-const postFav = express.Router()
-
-postFav.post('/fav', (req, res) => {
-    console.log(req.body)
-    if(req.body) {
+const postFav = (req, res) => {
+    if (req.body) {
         myFavorites.push(req.body)
-        return res.json(myFavorites)
+        return res.status(200).json(myFavorites)
     }
-})
+}
 
-const deleteFav = express.Router()
-
-deleteFav.delete('/fav/:id', (req, res) => {
-    const {id} = req.params
+const deleteFav = (req, res) => {
+    const {id} = req.params;
 
     const charIndex = myFavorites.findIndex(char => char.id === parseInt(id))
     if (charIndex > -1) {
         myFavorites.splice(charIndex, 1)
         return res.json(myFavorites)
     }
-})
+    // myFavorites = myFavorites.filter((char) => char.id !== parseInt(id))
+
+    // return res.json(myFavorites)
+}
 
 module.exports = {
     postFav,

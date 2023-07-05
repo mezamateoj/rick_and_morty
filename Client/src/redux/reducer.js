@@ -12,7 +12,8 @@ export default function reducer(state=initialState, action) {
         case 'ADD_FAV':
             return { ...state, 
                 myFavorites: action.payload, 
-                allCharacters: action.payload 
+                allCharacters: action.payload,
+                originalFavorites: action.payload 
             };
         // case 'ADD_FAV':
 
@@ -61,12 +62,14 @@ export default function reducer(state=initialState, action) {
 
         case 'LOGOUT':
             return {
-                myFavorites: [],
-                allCharacters: [],
+                ...state
+
             }
         
         default:
-            return {...state}
+            return {
+                ...state
+            }
     }
 
 }

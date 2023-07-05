@@ -1,23 +1,40 @@
 const axios = require('axios');
-const express = require('express')
-
-const getCharById = express.Router()
+const url = ('https://rickandmortyapi.com/api/character')
 
 
-const url = ('https://rickandmortyapi.com/api/character/:id')
+// const getCharById = (req, res) => {
+//     const {id} = req.params;
+//     console.log(`${url}/${id}`)
+//     axios.get(`${url}/${id}`)
+//     .then(response => response.data)
+//     .then((data) => {
 
-getCharById.get('/character/:id', (req, res) => {
-    const {id} = req.params
-    
-    axios.get(`https://rickandmortyapi.com/api/character/${id}`)
-    // first promise for the axios request
-    .then((res) => {
-        // console.log(res.data)
-        // console.log(res.data.results)
-        return res.data;
-    })
-    // second promise to extract the data we want
-    .then((data) => {
+//         if(data.name) {
+//             const saveChar = {
+//                 id: data.id,
+//                 name: data.name,
+//                 gender: data.gender,
+//                 species: data.species,
+//                 origin: data.origin.name,
+//                 image: data.image,
+//                 status: data.status
+//             }
+//             return res.status(200).json(saveChar);
+//         }
+//         return res.status(404).send('Not Found');
+
+//     })
+//     .catch((err) => {
+//         return res.status(500).send(err.message)
+//     })
+// }
+
+const getCharById = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const response = await axios.get(`${url}/${id}`)
+        const { data } = await response
+        // console.log(data)
         const saveChar = {
             id: data.id,
             name: data.name,
@@ -27,17 +44,13 @@ getCharById.get('/character/:id', (req, res) => {
             image: data.image,
             status: data.status
         }
-        return saveChar;
-    })
-    .then((saveChar) => {
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify(saveChar));
-    })
-    .catch((err) => {
-        res.write(500, { 'Content-Type': 'text/plain' });
-        res.end(err);
-    })
+        return res.status(200).json(saveChar)
+        
+    } catch (error) {
+        console.log(error.message)
+        return res.send(error)
+    }
+
 }
-)
 
 module.exports = getCharById;

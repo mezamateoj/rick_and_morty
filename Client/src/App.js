@@ -46,28 +46,24 @@ function App({removeFav, logOut}) {
    // };
 
 
-
-   // const EMAIL = 'mezamateoj@gmail.com'
-   // const PASSWORD = 'Pepito13'
-
-   // function login(data) {
-   //    if (data.email === EMAIL && data.password === PASSWORD) {
-   //       setAccess(true)
-   //       navigate('/home');
-   //    } else {
-   //       setAccess(false)
-   //       navigate('/')
-   //       alert('Wrong Credentials')
-   //    }
-   // }
-   function login(userData) {
+   async function login(userData) {
       const { email, password } = userData;
-      const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
-         const { access } = data;
-         setAccess(data);
-         access && navigate('/home');
-      });
+
+      try {
+         const URL = 'http://localhost:3001/rickandmorty/login/';
+         const response = await axios(URL + `?email=${email}&password=${password}`)
+         const { data } = response
+
+         if(data.access === false) {
+            return alert('Wrong Credentials!')
+         }
+
+         setAccess(data.access)
+         data.access && navigate('/home')
+         
+      } catch (error) {
+         console.log(error)    
+      }
    }
 
    function logout() {
@@ -84,24 +80,85 @@ function App({removeFav, logOut}) {
    // push which is not the correct way to update state in React. 
    // push modifies the original array and doesn't return a new array, 
    // which can lead to unpredictable state change
-   function onSearch(id) {
-      axios.get(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
-         if (data.name) {
-            if (characters.find((character) => character.id === data.id)) {
-               return window.alert('Character already exists!');
-            }
-            setCharacters((oldChars) => [...oldChars, data]);
+   // function onSearch(id) {
+   //    axios.get(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
+   //       if (data.name) {
+   //          if (characters.find((character) => character.id === data.id)) {
+   //             return window.alert('Character already exists!');
+   //          }
+   //          setCharacters((oldChars) => [...oldChars, data]);
 
-         } else {
-            window.alert('Please enter a valid ID!');
+   //       } else {
+   //          window.alert('Please enter a valid ID!');
+   //       }
+   //    }).catch((error) => {  // handle if user inputs letters
+   //       if(error.response) {
+   //          console.log(error.response.status);
+   //          alert('Please enter a valid ID!')
+   //       }
+   //    })
+   // }
+   // async function onSearch(id) {
+   //    // check if id client is not a number
+   //    if (isNaN(id)) {
+   //       return alert('Please enter a numeric ID!');
+   //    } 
+   //    try {
+   //       const response = await axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
+
+   //       if (response.data && response.data.name) {
+   //          console.log(response.data)
+   //          const character = response.data
+
+   //          // case when character already exists
+   //          if (characters.find((char) => char.id === character.id)) {
+   //                return alert('Character already exists!')
+   //          }
+   //          // add the new character to the array
+   //          setCharacters((oldChar) => [...oldChar, response.data])
+
+   //       } else {
+   //          return alert('Character Not Found')
+   //       }
+
+   //    } catch (error) {
+   //       console.log(error.response?.status  || error.message)
+   //       alert('Error');
+         
+   //    }
+   // }
+   async function onSearch(id) {
+      // check if id client is not a number
+      if (isNaN(id)) {
+         return alert('Please enter a numeric ID!');
+      } 
+   
+      try {
+         const response = await axios.get(`http://localhost:3001/rickandmorty/character/${id}`);
+         const character = response.data;
+         
+         // If the character does not have a name or does not exist
+         if (response.data.status === 404) {
+            return alert('Please enter a valid ID!');
          }
-      }).catch((error) => {  // handle if user inputs letters
+         
+         // If character already exists in the array
+         if (characters.find((char) => char.id === character.id)) {
+            return alert('Character already exists!');
+         } 
+         
+         // If character does not exist, add it to the array
+         setCharacters((oldChars) => [...oldChars, character]);
+         
+         
+      } catch (error) {
          if(error.response) {
             console.log(error.response.status);
-            alert('Please enter a valid ID!')
+            return alert('Please enter a valid ID!')
          }
-      })
+      }
    }
+   
 
    function onClose(id) {
       const numberId = Number(id);
@@ -120,7 +177,7 @@ function App({removeFav, logOut}) {
             {/* <Route path='/home' element={<Pagination charsPerPage={charsPerPage} totalPosts={characters.length} paginate={paginate} />} /> */}
             <Route path='/about' element={<About/>} />
             <Route path='/favorites' element={<Favorites onClose={onClose}/>} />
-            <Route path='/create' element={<Create/>} />
+            {/* <Route path='/create' element={<Create/>} /> */}
             <Route path='/detail/:id' element={<Detail />}/>
          </Routes>
       </div>

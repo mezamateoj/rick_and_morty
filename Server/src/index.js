@@ -1,12 +1,7 @@
-const getCharById = require('./controllers/getCharById');
-const { postFav, deleteFav } = require('./controllers/handleFavorites')
-const loginInfo = require('./controllers/login')
-const createImg = require('./controllers/createAI')
 const express = require('express')
-const bodyParser = require("body-parser");
-const cors = require("cors");
 const server = express()
 const port = 3001
+const router = require('./routes/index')
 
 // const http = require('http')
 // node way of creating server
@@ -34,15 +29,8 @@ server.use((req, res, next) => {
  });
 
 
-server.use(express.json())
-// server.use(bodyParser.json());
-// server.use(cors());
-
-server.use('/rickandmorty', getCharById)
-server.use('/rickandmorty', postFav)
-server.use('/rickandmorty', deleteFav)
-server.use('/rickandmorty', loginInfo)
-server.use(createImg)
+server.use(express.json())  // json info get transform into js obj
+server.use('/rickandmorty', router)
 
 
 
