@@ -16,9 +16,6 @@ const deleteFav = (req, res) => {
         myFavorites.splice(charIndex, 1)
         return res.json(myFavorites)
     }
-    // myFavorites = myFavorites.filter((char) => char.id !== parseInt(id))
-
-    // return res.json(myFavorites)
 }
 
 module.exports = {

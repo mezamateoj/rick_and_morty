@@ -4,13 +4,11 @@ const app = require('../app')
 // const agent = request(app)
 const userInfo = require('../utils/users')
 
-
-
 describe('GET /rickandmorty/character/:id', () => {
     test('Status 200', async () => {
         const response = await request(app)
         .get('/rickandmorty/character/1')
-        expect(200)
+        expect(response.statusCode).toBe(200)
     })
 
     test('Responds object with properties: "id", "name", "species", "gender", "status", "origin", and "image"', async () => {
@@ -26,7 +24,7 @@ describe('GET /rickandmorty/character/:id', () => {
     test('Status 500', async () => {
         const response = await request(app)
         .get('/rickandmorty/character/1000')
-        expect(500)
+        expect(response.statusCode).toBe(500)
     })
     
 
@@ -57,8 +55,32 @@ describe('POST /rickandmorty/fav"', () => {
         const postResponse = await request(app)
         .post('/rickandmorty/fav')
         .send(favorite)
-
-        expect(postResponse.body).toEqual([favorite])
+        expect(postResponse.body).toContainEqual(favorite)
     })
-    
+
+    test('Add fav Character without deleting previous ones', async () => {
+        // Favorite data to be added
+        const favorite = { name: 'Morty', id: 2 };
+
+        const postResponse = await request(app)
+        .post('/rickandmorty/fav')
+        .send(favorite)
+
+        expect(postResponse.body.length).toBe(2)
+    })
+
+
 })
+
+describe('DELETE /rickandmorty/fav/:id', () => {
+    test('Delete Character', async () => {
+        const response = await request(app)
+        .delete('/rickandmorty/fav/1')
+        console.log(response.body)
+        expect(response.body.length).toBe(1)
+        
+    })
+})
+
+
+
