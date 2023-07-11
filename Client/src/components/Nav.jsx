@@ -20,7 +20,17 @@ function Nav ({onSearch, onLogout }) {
 
     return (
         <nav className="nav">
-            <h1>Rick and Morty</h1>
+            <div class="container">
+                <h2 class="title">
+                    <span class="title-word title-word-1">Rick</span>
+                    <span class=""> </span>
+                    <span class="title-word title-word-2">and</span>
+                    <span class=""> </span>
+                    <span class="title-word title-word-3">Morty</span>
+                    
+                </h2>
+            </div>
+            
             <ul className="nav-items">
                 <li> <SearchBar className='search-nav' onSearch={onSearch} /> </li>
                 <li><NavLink style={{ textDecoration: 'none', color: '#181818' }} className='home' to={'/home'}>Home</NavLink></li>

@@ -12,6 +12,52 @@ body, html {
 /* nav css style ---------------------------------- */
 
 /* todo when click about add random button hidden  */
+.title-word {
+   animation: color-animation 4s linear infinite;
+ }
+ 
+ .title-word-1 {
+   --color-1: #3F0071;
+   --color-2: #3D8DAE;
+   --color-3: #D21312;
+ }
+ 
+ .title-word-2 {
+   --color-1: #DBAD4A;
+   --color-2: #0E2954;
+   --color-3: #17594A;
+ }
+ 
+ .title-word-3 {
+   --color-1: #8758FF;
+   --color-2: #4F4557;
+   --color-3: #181818;
+ }
+
+ 
+ @keyframes color-animation {
+   0%    {color: var(--color-1)}
+   32%   {color: var(--color-1)}
+   33%   {color: var(--color-2)}
+   65%   {color: var(--color-2)}
+   66%   {color: var(--color-3)}
+   99%   {color: var(--color-3)}
+   100%  {color: var(--color-1)}
+}
+ 
+ 
+.container {
+   display: grid;
+   place-items: center;  
+   text-align: center;
+}
+ 
+.title {
+   font-family: inherit;
+   text-transform: uppercase;
+}
+
+
 .nav {
    /* background-color: #F4EEE0; */
    background-color: #00ff75;
@@ -418,7 +464,7 @@ ul:first-child li {
    background-size: cover;
 }
 
-/* form css  */
+/* form / log in css  */
 
 /* .form-parent {
    border: 2px solid black;
@@ -426,6 +472,11 @@ ul:first-child li {
    justify-content: center;
    align-items: center;
 } */
+.svg-log {
+   width: 120px;
+   height: 200px;
+}
+
 
 .form-container {
    text-align: center;
@@ -481,7 +532,7 @@ ul:first-child li {
    margin-top: 5px;
    margin-left: 16px;
    padding: 8px 15px;
-   background-color: #3898EC;
+   background-color: #00ff75;
    color: #ffffff;
    font-size: 0.875rem;
    line-height: 1.25rem;
