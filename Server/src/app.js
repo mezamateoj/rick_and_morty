@@ -1,6 +1,7 @@
 const express = require('express')
 const server = express()
 const router = require('./routes/index')
+const cors = require('cors')
 
 // const http = require('http')
 // node way of creating server
@@ -27,6 +28,7 @@ server.use((req, res, next) => {
     next();
  });
 
+server.use(cors())
 
 server.use(express.json())  // json info get transform into js obj
 server.use('/rickandmorty', router)

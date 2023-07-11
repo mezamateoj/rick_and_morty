@@ -1,7 +1,7 @@
 const getCharById = require('../controllers/getCharById');
 const { postFav, deleteFav } = require('../controllers/handleFavorites')
 const loginInfo = require('../controllers/login')
-// const createImg = require('./controllers/createAI')
+const createAI = require('../controllers/createAI')
 
 const router = require('express').Router();
 
@@ -25,5 +25,8 @@ router.delete('/fav/:id', (req, res) => {
 
 })
 
+router.post('/create', (req, res) => {
+    createAI(req, res)
+})
 
 module.exports = router;

@@ -7,33 +7,55 @@ import React from "react";
 function Detail() {
     const { id } = useParams()
     const [character, setCharacter] = useState({})
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
-           if (data.name) {
-              setCharacter(data);
-           } else {
-            window.alert('No character with that ID')
+        const fetchCharacter = async () => {
+            try {
+                const { data } = await axios(`http://localhost:3001/rickandmorty/character/${id}`)
+                if (data.name) {
+                    setCharacter(data);
+                } else {
+                    window.alert('No character with that ID')
+                }
+            } catch (error) {
+                console.error("Error fetching character:", error);
+            } finally {
+                setLoading(false);  // Set loading to false when finished fetching
             }
-        })
-        setCharacter({});
+        }
+
+        fetchCharacter();
     }, [id]);
+
+    // if (loading) return ;
+
+
 
     return (
         <div className="detail-container">
-            <div className="card-container">
-                <img src={character.image} alt="" />
-                <div className="shade"></div>
-                <div className="detail-text">
-                    <h2>Name : {character.name}</h2>
-                    <p>
-                        <h3>ID: {character.id}</h3>
-                        Specie: {character.species}<br></br>
-                        Gender: {character.gender}
-                    </p>
-                    <h4>Status: {character.status}</h4>
-                </div>
-            </div>
+            { loading ?
+                (
+                    <div class="loader">
+                        <div data-glitch="Loading..." class="glitch">Loading...</div>
+                    </div>
+
+                ) :
+                
+                (<div className="card-container">
+                        <img src={character.image} alt="" />
+                        <div className="shade"></div>
+                        <div className="detail-text">
+                            <h2>{character.name}</h2>
+                            <p>
+                                <h3>ID: {character.id}</h3>
+                                {character.species}<br></br>
+                                {character.gender}
+                            </p>
+                            <h4>Status: {character.status}</h4>
+                        </div>
+                    </div>) 
+            }
         </div>
     )
 }

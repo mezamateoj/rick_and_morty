@@ -1,39 +1,41 @@
-const express = require('express')
 require("dotenv").config();
-const bodyParser = require("body-parser");
-const cors = require("cors");
 const { Configuration, OpenAIApi } = require("openai");
-const { OPENAI_API_KEY } = process.env;
 
-const createImg = express.Router()
 
+
+// const createAI = express.Router()
 const configuration = new Configuration({
-    apiKey: OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
 });
+
+
 
 const openai = new OpenAIApi(configuration);
 
-
-createImg.post('/create', async (req, res) => {
-    console.log('received', req.body)
-    const { prompt } = req.body
-    const response = await openai.createImage({
-        prompt,
-        n:1,
-        size: "512x512"
-    });
-
-    console.log('OpenAI response:', response);
-
-    if(response) {
-        image_url = response.data.data[0].url
-        console.log(image_url)
-        return res.send(image_url)
+const createAI = async (req,res) => {
+        const { prompt } = req.body
+        console.log('promt ' + prompt)
+    try {
+        const response = await openai.createImage({
+            prompt,
+            size: "512x512",
+            n:1,
+        });
+        
+        console.log('OpenAI response:', response);
+        
+        if(response) {
+            const image_url = response.data.data[0].url
+            
+            return res.status(200).send({src: image_url})
+        }
+        
+    } catch (error) {
+        console.log('Error:', error);
+        return res.status(500).send({error})
+        
     }
-
-    return res.send("Image couldn't process")
-})
+}
 
 
-
-module.exports = createImg;
+module.exports = createAI;

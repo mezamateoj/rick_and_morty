@@ -23,11 +23,11 @@ function Nav ({onSearch, onLogout }) {
             <h1>Rick and Morty</h1>
             <ul className="nav-items">
                 <li> <SearchBar className='search-nav' onSearch={onSearch} /> </li>
-                <li><NavLink style={{ textDecoration: 'none' }} className='home' to={'/home'}>Home</NavLink></li>
-                <li><NavLink style={{ textDecoration: 'none' }} className='fav' to={'/favorites'}>Favorites</NavLink></li>
-                <li><NavLink style={{ textDecoration: 'none'}} className="create" to={'/create'}>Create</NavLink></li> 
-                <li><NavLink style={{ textDecoration: 'none'}} className="about" to={'/about'}>About</NavLink></li> 
-                <li><NavLink style={{ textDecoration: 'none' }} className='logout' to={'/'} onClick={handleLogout}>Log Out</NavLink></li>
+                <li><NavLink style={{ textDecoration: 'none', color: '#181818' }} className='home' to={'/home'}>Home</NavLink></li>
+                <li><NavLink style={{ textDecoration: 'none', color: '#181818'}} className='fav' to={'/favorites'}>Favorites</NavLink></li>
+                <li><NavLink style={{ textDecoration: 'none', color: '#181818'}} className="create" to={'/create'}>Create</NavLink></li> 
+                <li><NavLink style={{ textDecoration: 'none', color: '#181818'}} className="about" to={'/about'}>About</NavLink></li> 
+                <li><NavLink style={{ textDecoration: 'none', color: '#181818' }} className='logout' to={'/'} onClick={handleLogout}>Log Out</NavLink></li>
             </ul>
         </nav>
     )

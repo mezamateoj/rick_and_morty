@@ -13,8 +13,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { removeFav, logOut } from './redux/actions';
-import Pagination from './components/Pagination';
-import Create from './components/Create';
+// import Pagination from './components/Pagination';
+// import Create from './components/Create';
 
 
 
