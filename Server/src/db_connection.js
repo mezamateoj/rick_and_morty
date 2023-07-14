@@ -1,8 +1,7 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-// const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
-const { UserModel } = require('../src/models/User')
-const { FavoriteModel } = require('../src/models/Favorite')
+const UserModel = require('../src/models/User')
+const FavoriteModel = require('../src/models/Favorite')
 
 // EJERCICIO 03
 // A la instancia de Sequelize le falta la URL de conexión. ¡Agrégala!
@@ -22,10 +21,10 @@ FavoriteModel(sequelize);
 
 // Ejercicio 06
 // ¡Relaciona tus modelos aquí abajo!
-// const { User, Favorite } = sequelize.models;
+const { User, Favorite } = sequelize.models;
 
-User.belongsToMany(this.Favorite, { through: 'user_favorite' });
-Favorite.belongsToMany(this.User, { through: 'user_favorite' });
+User.belongsToMany(Favorite, { through: 'user_favorite' });
+Favorite.belongsToMany(User, { through: 'user_favorite' });
 
 module.exports = {
     User,

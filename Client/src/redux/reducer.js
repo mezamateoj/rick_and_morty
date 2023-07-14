@@ -5,15 +5,17 @@ const initialState = {
     originalFavorites: [],
 }
 
-export default function reducer(state=initialState, action) {
+export default function reducer(state = initialState, action) {
     let allCharacters;
 
-    switch(action.type) {
+    switch (action.type) {
         case 'ADD_FAV':
-            return { ...state, 
-                myFavorites: action.payload, 
+            return {
+                ...state,
+                // myFavorites: [...state.myFavorites, action.payload],
+                myFavorites: action.payload,
                 allCharacters: action.payload,
-                originalFavorites: action.payload 
+                originalFavorites: action.payload
             };
         // case 'ADD_FAV':
 
@@ -25,8 +27,9 @@ export default function reducer(state=initialState, action) {
         //     }
         // REDUCER | REMOVE_FAV
         case 'REMOVE_FAV':
-            return { ...state, 
-                myFavorites: action.payload 
+            return {
+                ...state,
+                myFavorites: action.payload
             };
         // case 'REMOVE_FAV':
         //     return {
@@ -48,11 +51,11 @@ export default function reducer(state=initialState, action) {
                 }
                 return 0; // add this line to return a value at the end of the arrow function
             });
-                return {
-                    ...state,
-                    allCharacters,
-                    myFavorites: [...allCharacters],  // Update myFavorites based on sorted allCharacters
-                }
+            return {
+                ...state,
+                allCharacters,
+                myFavorites: [...allCharacters],  // Update myFavorites based on sorted allCharacters
+            }
 
         case 'RESET':
             return {
@@ -65,7 +68,7 @@ export default function reducer(state=initialState, action) {
                 ...state
 
             }
-        
+
         default:
             return {
                 ...state

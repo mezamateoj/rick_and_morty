@@ -27,26 +27,6 @@ function App({ removeFav, logOut }) {
 
    const [access, setAccess] = useState(false)
 
-   // // where the user is in the app
-   // const [currentPage, setCurrentPage] = useState(1)
-   // // number of characters per page
-   // const [charsPerPage] = useState(8)
-
-
-   // // index of the last character of the page
-   // const lastCharIndex = currentPage * charsPerPage
-   // // index of the first character of the page
-   // const firstCharIndex = lastCharIndex - charsPerPage
-   // // // calculate the number of pages
-   // // const pages = Math.ceil(characters.length / charsPerPage)
-   // // records to be displayed on the current page
-   // const currentChars = characters.slice(firstCharIndex, lastCharIndex)
-
-   // const paginate = (pageNumber) => {
-   //    setCurrentPage(pageNumber);
-   // };
-
-
    async function login(userData) {
       const { email, password } = userData;
 
@@ -78,56 +58,6 @@ function App({ removeFav, logOut }) {
    }, [access, navigate])
 
 
-   // push which is not the correct way to update state in React. 
-   // push modifies the original array and doesn't return a new array, 
-   // which can lead to unpredictable state change
-   // function onSearch(id) {
-   //    axios.get(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
-   //       if (data.name) {
-   //          if (characters.find((character) => character.id === data.id)) {
-   //             return window.alert('Character already exists!');
-   //          }
-   //          setCharacters((oldChars) => [...oldChars, data]);
-
-   //       } else {
-   //          window.alert('Please enter a valid ID!');
-   //       }
-   //    }).catch((error) => {  // handle if user inputs letters
-   //       if(error.response) {
-   //          console.log(error.response.status);
-   //          alert('Please enter a valid ID!')
-   //       }
-   //    })
-   // }
-   // async function onSearch(id) {
-   //    // check if id client is not a number
-   //    if (isNaN(id)) {
-   //       return alert('Please enter a numeric ID!');
-   //    } 
-   //    try {
-   //       const response = await axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
-
-   //       if (response.data && response.data.name) {
-   //          console.log(response.data)
-   //          const character = response.data
-
-   //          // case when character already exists
-   //          if (characters.find((char) => char.id === character.id)) {
-   //                return alert('Character already exists!')
-   //          }
-   //          // add the new character to the array
-   //          setCharacters((oldChar) => [...oldChar, response.data])
-
-   //       } else {
-   //          return alert('Character Not Found')
-   //       }
-
-   //    } catch (error) {
-   //       console.log(error.response?.status  || error.message)
-   //       alert('Error');
-
-   //    }
-   // }
    async function onSearch(id) {
       // check if id client is not a number
       if (isNaN(id)) {
